@@ -93,6 +93,8 @@ dependencies {
     //Leak Canary
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
 
+    //DropDown
+    implementation 'com.asksira.android:dropdownview:1.0.2'
 
     //Permissions
     implementation 'pub.devrel:easypermissions:1.2.0'
