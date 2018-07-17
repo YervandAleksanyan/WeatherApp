@@ -6,10 +6,10 @@ data class WeatherResponse(
         val message: Int,
         val city: City,
         val cnt: Int,
-        val list: List<X>
+        val list: List<Forecast>
 )
 
-data class X(
+data class Forecast(
         val dt: Int,
         val temp: Temp,
         val pressure: Double,

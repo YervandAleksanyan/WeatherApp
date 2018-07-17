@@ -4,12 +4,14 @@ import dagger.Module
 import dagger.Provides
 import dev.yervand.weatherapp.BuildConfig
 import dev.yervand.weatherapp.domain.WeatherService
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+
 
 @Module
 class RetrofitModule {
@@ -34,7 +36,9 @@ class RetrofitModule {
         builder.connectTimeout(300, TimeUnit.SECONDS)
         builder.readTimeout(300, TimeUnit.SECONDS)
         builder.writeTimeout(300, TimeUnit.SECONDS)
+        builder.addInterceptor(keyInterceptor())
         builder.addInterceptor(httpLoggingInterceptor)
+
         return builder.build()
     }
 
@@ -48,6 +52,22 @@ class RetrofitModule {
         return loggingInterceptor
     }
 
+    private fun keyInterceptor(): Interceptor =
+            Interceptor {
+                val original = it.request()
+                val originalHttpUrl = original.url()
+
+                val url = originalHttpUrl.newBuilder()
+                        .addQueryParameter("appid", "fd87c5b3684a9d52805b52a90698d90c")
+                        .build()
+
+                val requestBuilder = original.newBuilder()
+                        .url(url)
+
+                val request = requestBuilder.build()
+                it.proceed(request)
+            }
 }
+
 
 
