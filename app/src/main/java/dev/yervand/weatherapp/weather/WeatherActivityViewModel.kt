@@ -15,8 +15,8 @@ class WeatherActivityViewModel @Inject constructor(private val repository: ForeC
 
     val error: MutableLiveData<String> = MutableLiveData()
 
-    fun getForecasts(cityName: String, daysRange: Int = 7) {
-        repository.getSevenDayForecasts(cityName, daysRange)
+    fun getForecasts(cityName: String) {
+        repository.getSevenDayForecasts(cityName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onResponseReceived,

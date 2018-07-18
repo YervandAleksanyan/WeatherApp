@@ -13,6 +13,7 @@ import android.widget.Toast
 import dev.yervand.weatherapp.R
 import dev.yervand.weatherapp.base.BaseActivity
 import dev.yervand.weatherapp.databinding.ActivityWeatherBinding
+import dev.yervand.weatherapp.domain.model.Forecast
 import dev.yervand.weatherapp.utils.CitiesDataProvider
 import javax.inject.Inject
 
@@ -27,7 +28,7 @@ class WeatherActivity : BaseActivity() {
     @Inject
     lateinit var factory: WeatherViewModelFactory
 
-    lateinit var binding: ActivityWeatherBinding
+    private lateinit var binding: ActivityWeatherBinding
 
 
     private lateinit var viewModel: WeatherActivityViewModel
@@ -38,7 +39,8 @@ class WeatherActivity : BaseActivity() {
         viewModel = ViewModelProviders.of(this, factory)[WeatherActivityViewModel::class.java]
         initCitiesList()
         viewModel.forecasts.observe(this, Observer {
-            Toast.makeText(this, it?.city?.name, Toast.LENGTH_LONG).show()
+            binding.cityPic.background = getDrawable(CitiesDataProvider.citiesPics[binding.dropdownview.selectedItemPosition])
+            it?.list?.let { it1 -> initForecastContentUI(it1, 0) }
         })
         viewModel.error.observe(this, Observer {
             Toast.makeText(this, it, Toast.LENGTH_LONG).show()
@@ -53,9 +55,15 @@ class WeatherActivity : BaseActivity() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                binding.cityPic.background = getDrawable(CitiesDataProvider.citiesPics[position])
                 viewModel.getForecasts(CitiesDataProvider.citiesList[position])
             }
         }
+    }
+
+    private fun initForecastContentUI(list: List<Forecast>, pos: Int) {
+        binding.humidityText.text = "${list[pos].main.humidity} %"
+        binding.temp.text = list[pos].main.temp.toInt().toString()
+        binding.windText.text = "${list[pos].wind.speed} mph"
+        binding.weatherText.text = list[pos].weather[0].main.capitalize()
     }
 }

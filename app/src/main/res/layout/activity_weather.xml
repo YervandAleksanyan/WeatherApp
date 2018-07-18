@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-    </data>
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -24,11 +21,10 @@
             app:layout_constraintTop_toBottomOf="@+id/dropdownview" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="12"
             android:textColor="@android:color/white"
             android:textSize="80sp"
             app:layout_constraintBottom_toBottomOf="@+id/city_pic"
@@ -44,8 +40,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:background="@drawable/ic_degree"
-            app:layout_constraintBottom_toBottomOf="@+id/textView"
-            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintBottom_toBottomOf="@+id/temp"
+            app:layout_constraintStart_toEndOf="@+id/temp"
             app:layout_constraintTop_toTopOf="@+id/city_pic" />
 
         <LinearLayout
@@ -76,7 +72,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
-                    android:text="Rain"
                     android:textColor="@android:color/white"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -99,7 +94,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
-                    android:text="7 mph"
                     android:textColor="@android:color/white"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -121,7 +115,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
-                    android:text="78 %"
                     android:textColor="@android:color/white"
                     android:textSize="18sp" />
             </LinearLayout>

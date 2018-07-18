@@ -58,7 +58,7 @@ class RetrofitModule {
                 val originalHttpUrl = original.url()
 
                 val url = originalHttpUrl.newBuilder()
-                        .addQueryParameter("appid", "fd87c5b3684a9d52805b52a90698d90c")
+                        .addQueryParameter("APPID", "9db88ab8a3cc634c76b6802048e8fad9")
                         .build()
 
                 val requestBuilder = original.newBuilder()
