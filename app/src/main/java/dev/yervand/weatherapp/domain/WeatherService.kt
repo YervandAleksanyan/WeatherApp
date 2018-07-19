@@ -8,6 +8,7 @@ import retrofit2.http.Query
 interface WeatherService {
     companion object {
         val ENDPOINT = "http://api.openweathermap.org"
+        val ICON_ENDPOINT = "http://openweathermap.org/img/w/"
     }
 
     @GET("/data/2.5/forecast")

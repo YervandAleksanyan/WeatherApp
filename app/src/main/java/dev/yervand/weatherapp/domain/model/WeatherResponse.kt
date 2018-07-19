@@ -7,7 +7,7 @@ data class WeatherResponse(
         @SerializedName("cod") val cod: String,
         @SerializedName("message") val message: Double,
         @SerializedName("cnt") val cnt: Int,
-        @SerializedName("list") val list: List<Forecast>,
+        @SerializedName("list") val list: MutableList<Forecast>,
         @SerializedName("city") val city: City
 )
 
@@ -25,14 +25,15 @@ data class Coord(
 )
 
 data class Forecast(
-        @SerializedName("dt") val dt: Int,
+        @SerializedName("dt") val dt: Long,
         @SerializedName("main") val main: Main,
-        @SerializedName("weather") val weather: List<Weather>,
+        @SerializedName("weather") val weather: MutableList<Weather>,
         @SerializedName("clouds") val clouds: Clouds,
         @SerializedName("wind") val wind: Wind,
         @SerializedName("rain") val rain: Rain,
         @SerializedName("sys") val sys: Sys,
-        @SerializedName("dt_txt") val dtTxt: String
+        @SerializedName("dt_txt") val dtTxt: String,
+        var selected: Boolean
 )
 
 data class Sys(
