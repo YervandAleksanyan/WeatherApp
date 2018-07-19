@@ -9,11 +9,13 @@ import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
-object RxModule {
+class RxModule {
+    companion object {
+        const val MAIN = "main"
+        const val IO = "io"
+        const val COMPUTATION = "computation"
+    }
 
-    const val MAIN = "main"
-    const val IO = "io"
-    const val COMPUTATION = "computation"
 
     @Provides
     @Singleton
