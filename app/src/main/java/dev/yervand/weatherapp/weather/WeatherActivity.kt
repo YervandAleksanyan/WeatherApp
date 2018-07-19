@@ -49,12 +49,15 @@ class WeatherActivity : BaseActivity() {
         viewModel.forecasts.observe(this, Observer {
             binding.cityPic.background = getDrawable(CitiesDataProvider.citiesPics[binding.dropdownview.selectedItemPosition])
             it?.list?.let { it1 ->
+                showUI()
                 initForecastContentUI(it1[0])
                 provideItems(it1)
             }
 
         })
         viewModel.error.observe(this, Observer {
+            hideUI()
+            hidProgressBar()
             Toast.makeText(this, it, Toast.LENGTH_LONG).show()
         })
     }
@@ -67,6 +70,7 @@ class WeatherActivity : BaseActivity() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                showProgressBar()
                 viewModel.getForecasts(CitiesDataProvider.citiesList[position])
             }
         }
@@ -106,5 +110,21 @@ class WeatherActivity : BaseActivity() {
     private fun unSelectAllItems() {
         for (item in adapter.getItems())
             item.selected = false
+    }
+
+    private fun showUI() {
+        binding.mainUiChild.visibility = View.VISIBLE
+    }
+
+    private fun showProgressBar() {
+        binding.progressBar.visibility = View.VISIBLE
+    }
+
+    private fun hidProgressBar() {
+        binding.progressBar.visibility = View.GONE
+    }
+
+    private fun hideUI() {
+        binding.mainUiChild.visibility = View.GONE
     }
 }
