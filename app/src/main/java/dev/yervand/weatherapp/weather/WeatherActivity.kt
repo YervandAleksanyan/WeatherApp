@@ -17,10 +17,13 @@ import dev.yervand.weatherapp.base.BaseActivity
 import dev.yervand.weatherapp.databinding.ActivityWeatherBinding
 import dev.yervand.weatherapp.domain.WeatherService
 import dev.yervand.weatherapp.domain.model.Forecast
+import dev.yervand.weatherapp.domain.repository.Response
+import dev.yervand.weatherapp.domain.repository.Status
 import dev.yervand.weatherapp.presentation.BaseBindingAdapter
 import dev.yervand.weatherapp.utils.CitiesDataProvider
 import dev.yervand.weatherapp.weather.forecastlist.ForecastListAdapter
 import javax.inject.Inject
+
 
 class WeatherActivity : BaseActivity() {
     companion object {
@@ -40,26 +43,19 @@ class WeatherActivity : BaseActivity() {
 
     private lateinit var viewModel: WeatherActivityViewModel
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_weather)
         viewModel = ViewModelProviders.of(this, factory)[WeatherActivityViewModel::class.java]
         initRv()
         initCitiesList()
-        viewModel.forecasts.observe(this, Observer {
-            binding.cityPic.background = getDrawable(CitiesDataProvider.citiesPics[binding.dropdownview.selectedItemPosition])
-            it?.list?.let { it1 ->
-                showUI()
-                initForecastContentUI(it1[0])
-                provideItems(it1)
+        viewModel.citySelect.observe(this, Observer {
+            it?.let { it1 ->
+                viewModel.getForecasts(it1)
             }
-
         })
-        viewModel.error.observe(this, Observer {
-            hideUI()
-            hidProgressBar()
-            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
-        })
+        viewModel.response.observe(this, Observer(this@WeatherActivity::handleResponse))
     }
 
     private fun initCitiesList() {
@@ -70,8 +66,10 @@ class WeatherActivity : BaseActivity() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                showProgressBar()
-                viewModel.getForecasts(CitiesDataProvider.citiesList[position])
+                if (viewModel.lastSelectedPos != position) {
+                    viewModel.lastSelectedPos = position
+                    viewModel.citySelect.value = binding.dropdownview.selectedItem.toString()
+                }
             }
         }
     }
@@ -86,6 +84,7 @@ class WeatherActivity : BaseActivity() {
                 .load("${WeatherService.ICON_ENDPOINT}${item.weather[0].icon}.png")
                 .error(R.drawable.ic_rain)
                 .into(binding.weatherIcon)
+        binding.cityPic.background = getDrawable(CitiesDataProvider.citiesPics[binding.dropdownview.selectedItemPosition])
     }
 
     private fun initRv() {
@@ -107,6 +106,29 @@ class WeatherActivity : BaseActivity() {
         binding.forecastsList.scrollToPosition(0)
     }
 
+    private fun handleResponse(response: Response?) {
+        when (response?.status) {
+            Status.LOADING -> {
+                showProgressBar()
+            }
+
+            Status.SUCCESS -> {
+                showUI()
+                response.data?.list?.get(0)?.let {
+                    hidProgressBar()
+                    initForecastContentUI(it)
+                    provideItems(response.data.list)
+                }
+            }
+
+            Status.ERROR -> {
+                hidProgressBar()
+                hideUI()
+                showError(response.error?.message)
+            }
+        }
+    }
+
     private fun unSelectAllItems() {
         for (item in adapter.getItems())
             item.selected = false
@@ -126,5 +148,9 @@ class WeatherActivity : BaseActivity() {
 
     private fun hideUI() {
         binding.mainUiChild.visibility = View.GONE
+    }
+
+    private fun showError(msg: String?) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
     }
 }
