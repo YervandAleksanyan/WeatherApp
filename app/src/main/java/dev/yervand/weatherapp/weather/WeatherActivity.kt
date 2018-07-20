@@ -11,11 +11,9 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import com.squareup.picasso.Picasso
 import dev.yervand.weatherapp.R
 import dev.yervand.weatherapp.base.BaseActivity
 import dev.yervand.weatherapp.databinding.ActivityWeatherBinding
-import dev.yervand.weatherapp.domain.WeatherService
 import dev.yervand.weatherapp.domain.model.Forecast
 import dev.yervand.weatherapp.domain.repository.Response
 import dev.yervand.weatherapp.domain.repository.Status
@@ -48,6 +46,7 @@ class WeatherActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_weather)
         viewModel = ViewModelProviders.of(this, factory)[WeatherActivityViewModel::class.java]
+        binding.viewModel = viewModel
         initRv()
         initCitiesList()
         viewModel.citySelect.observe(this, Observer {
@@ -75,16 +74,12 @@ class WeatherActivity : BaseActivity() {
     }
 
     private fun initForecastContentUI(item: Forecast) {
-        binding.humidityText.text = "${item.main.humidity} %"
-        binding.temp.text = item.main.temp.toInt().toString()
-        binding.windText.text = "${item.wind.speed} mph"
-        binding.weatherText.text = item.weather[0].main.capitalize()
-        Picasso
-                .get()
-                .load("${WeatherService.ICON_ENDPOINT}${item.weather[0].icon}.png")
-                .error(R.drawable.ic_rain)
-                .into(binding.weatherIcon)
-        binding.cityPic.background = getDrawable(CitiesDataProvider.citiesPics[binding.dropdownview.selectedItemPosition])
+        viewModel.weatherIconUrl.set(item.weather[0].icon)
+        viewModel.humidityText.set(item.main.humidity.toString())
+        viewModel.temp.set(item.main.temp.toInt().toString())
+        viewModel.windText.set(item.wind.speed.toString())
+        viewModel.weatherText.set(item.weather[0].main.capitalize())
+        viewModel.cityBackground.set(CitiesDataProvider.citiesPics[binding.dropdownview.selectedItemPosition])
     }
 
     private fun initRv() {

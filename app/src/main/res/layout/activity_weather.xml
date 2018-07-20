@@ -2,6 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="dev.yervand.weatherapp.weather.WeatherActivityViewModel" />
+    </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -34,13 +41,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:adjustViewBounds="true"
-                    android:background="@drawable/london" />
+                    app:cityBackground="@{viewModel.cityBackground}" />
 
                 <TextView
                     android:id="@+id/temp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
+                    android:text="@{viewModel.temp}"
                     android:textColor="@android:color/white"
                     android:textSize="80sp"
                     app:layout_constraintBottom_toBottomOf="@+id/city_pic"
@@ -80,7 +88,7 @@
                             android:id="@+id/weather_icon"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:src="@drawable/ic_rain" />
+                            app:imageUrl="@{viewModel.weatherIconUrl}" />
 
                         <TextView
                             android:id="@+id/weather_text"
@@ -88,6 +96,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
+                            android:text="@{viewModel.weatherText}"
                             android:textColor="@android:color/white"
                             android:textSize="18sp" />
                     </LinearLayout>
@@ -110,6 +119,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
+                            android:text="@{viewModel.windText + ` mph`}"
                             android:textColor="@android:color/white"
                             android:textSize="18sp" />
                     </LinearLayout>
@@ -131,6 +141,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="10dp"
+                            android:text="@{viewModel.humidityText + ` %`}"
                             android:textColor="@android:color/white"
                             android:textSize="18sp" />
                     </LinearLayout>
