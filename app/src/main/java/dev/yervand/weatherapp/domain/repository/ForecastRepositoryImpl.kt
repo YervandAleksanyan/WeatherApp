@@ -5,7 +5,7 @@ import dev.yervand.weatherapp.domain.model.WeatherResponse
 import io.reactivex.Single
 import javax.inject.Inject
 
-class ForeCastRepositoryImpl @Inject constructor(private val service: WeatherService) : ForeCastRepository {
+class ForecastRepositoryImpl @Inject constructor(private val service: WeatherService) : ForecastRepository {
     override fun getSevenDayForecasts(cityName: String): Single<WeatherResponse> =
             service.getSevenDayWeatherData(cityName)
 }
