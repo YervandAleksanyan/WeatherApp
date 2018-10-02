@@ -6,7 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import dev.yervand.weatherapp.base.BaseActivity
-import dev.yervand.weatherapp.weather.WeatherActivity
+import dev.yervand.weatherapp.view.WeatherActivity
 
 
 class SplashActivity : BaseActivity() {

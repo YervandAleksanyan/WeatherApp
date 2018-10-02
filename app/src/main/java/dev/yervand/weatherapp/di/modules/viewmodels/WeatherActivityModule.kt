@@ -1,7 +1,8 @@
-package dev.yervand.weatherapp.weather
+package dev.yervand.weatherapp.di.modules.viewmodels
 
 import dagger.Binds
 import dagger.Module
+import dev.yervand.weatherapp.view.WeatherActivity
 
 @Module
 abstract class WeatherActivityModule {
