@@ -1,4 +1,4 @@
-package dev.yervand.weatherapp.weather.forecastlist
+package dev.yervand.weatherapp.view.adapters
 
 import android.databinding.ViewDataBinding
 import android.view.LayoutInflater

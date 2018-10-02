@@ -1,4 +1,4 @@
-package dev.yervand.weatherapp.weather
+package dev.yervand.weatherapp.di.factories
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
