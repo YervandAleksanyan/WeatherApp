@@ -1,9 +1,12 @@
 package dev.yervand.weatherapp.viewmodels.base
 
+import android.databinding.ObservableBoolean
+import android.databinding.ObservableField
+
 interface AsyncCommand : DisposableCommand {
-    fun IsBusy(): Boolean
+    fun isBusy(): ObservableBoolean
 
-    fun IsFinished(): Boolean
+    fun isFinished(): ObservableBoolean
 
-    fun FailureMessage(): String
+    fun failureMessage(): ObservableField<String>
 }

@@ -3,6 +3,7 @@ package dev.yervand.weatherapp.utils
 import android.databinding.BindingAdapter
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Spinner
 import android.widget.TextView
 import com.squareup.picasso.Picasso
 import dev.yervand.weatherapp.R
@@ -25,6 +26,12 @@ object BindingAdapters {
     @BindingAdapter("cityBackground")
     fun ImageView.setBackground(drawableID: Int) {
         this.setBackgroundResource(drawableID)
+    }
+
+    @JvmStatic
+    @BindingAdapter("spinnerItems")
+    fun Spinner.setItems(items: ArrayList<String>) {
+        /*this.adapter = ArrayAdapter<String>()*/
     }
 
     @JvmStatic

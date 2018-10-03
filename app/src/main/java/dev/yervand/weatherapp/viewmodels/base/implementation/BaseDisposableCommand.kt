@@ -19,9 +19,9 @@ abstract class BaseDisposableCommand : BaseCommand(), DisposableCommand {
 
     override fun isDisposed() = disposed
 
-    override fun execute(obj: Any) {
+    override fun execute(obj: Any?) {
         task = executeCore(obj)
     }
 
-    protected abstract fun executeCore(obj: Any): Disposable
+    protected abstract fun executeCore(obj: Any?): Disposable
 }

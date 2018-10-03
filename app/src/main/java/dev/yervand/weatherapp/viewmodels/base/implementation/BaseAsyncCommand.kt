@@ -1,42 +1,42 @@
 package dev.yervand.weatherapp.viewmodels.base.implementation
 
-import android.databinding.Bindable
-import dev.yervand.weatherapp.BR
+import android.databinding.Observable
+import android.databinding.ObservableBoolean
+import android.databinding.ObservableField
 import dev.yervand.weatherapp.viewmodels.base.AsyncCommand
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
-import kotlin.properties.Delegates
 
 abstract class BaseAsyncCommand<T> : BaseCommand(), AsyncCommand, Disposable {
-    @get:Bindable
-    var isBusy: Boolean by Delegates.observable(true) { _, _, _ ->
-        notifyPropertyChanged(BR.busy)
-    }
+    var busy: ObservableBoolean = ObservableBoolean()
 
-    @get:Bindable
-    var isFinished: Boolean by Delegates.observable(false) { _, _, _ ->
-        notifyPropertyChanged(BR.finished)
-    }
+    var finished: ObservableBoolean = ObservableBoolean()
 
-    @get:Bindable
-    var failureMessage: String by Delegates.observable("") { _, _, _ ->
-        notifyPropertyChanged(BR.failureMessage)
+
+    var failureMessage: ObservableField<String> = ObservableField()
+
+    init {
+        busy.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback() {
+            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
+                enabled.set(!busy.get())
+            }
+        })
     }
 
     private var action: Disposable? = null
     @Volatile
     private var disposed: Boolean = false
 
-    override fun execute(obj: Any) {
-        if (!isEnabled()) return
+    override fun execute(obj: Any?) {
+        if (!enabled.get()) return
         val task = getAsyncAction(obj)
         if (task != null) {
-            isBusy = true
-            isFinished = false
-            failureMessage = ""
+            busy.set(true)
+            finished.set(false)
+            failureMessage.set("")
             action = task
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -44,12 +44,12 @@ abstract class BaseAsyncCommand<T> : BaseCommand(), AsyncCommand, Disposable {
         }
     }
 
-    protected abstract fun getAsyncAction(obj: Any): Single<T>?
+    protected abstract fun getAsyncAction(obj: Any?): Single<T>?
 
     protected abstract fun handleResult(result: T): Boolean
 
-    protected fun handleError(e: Throwable) {
-        failureMessage = "Something went wrong while executing the action. Please try again"
+    protected open fun handleError(e: Throwable) {
+        failureMessage.set("Something went wrong while executing the action. Please try again")
     }
 
     override fun dispose() {
@@ -61,24 +61,17 @@ abstract class BaseAsyncCommand<T> : BaseCommand(), AsyncCommand, Disposable {
         return disposed
     }
 
-    override fun notifyPropertyChanged(fieldId: Int) {
-        super.notifyPropertyChanged(fieldId)
-        if (fieldId == BR.busy) {
-            setEnabled(!isBusy)
-        }
-    }
-
     private fun getAsyncActionObserver(): DisposableSingleObserver<T> {
         return object : DisposableSingleObserver<T>() {
             override fun onSuccess(result: T) {
-                isBusy = false
-                isFinished = handleResult(result)
+                busy.set(false)
+                finished.set(handleResult(result))
                 disposeAction()
             }
 
             override fun onError(e: Throwable) {
-                isBusy = false
-                isFinished = true
+                busy.set(false)
+                finished.set(true)
                 handleError(e)
                 disposeAction()
             }
@@ -87,11 +80,17 @@ abstract class BaseAsyncCommand<T> : BaseCommand(), AsyncCommand, Disposable {
     }
 
     private fun disposeAction() {
-        if (action != null && !action!!.isDisposed) {
-            action!!.dispose()
+        action?.let {
+            it.dispose()
             action = null
         }
     }
+
+    override fun isBusy(): ObservableBoolean = busy
+
+    override fun isFinished(): ObservableBoolean = finished
+
+    override fun failureMessage(): ObservableField<String> = failureMessage
 }
 
 

@@ -1,13 +1,9 @@
 package dev.yervand.weatherapp.viewmodels.base
 
-import android.databinding.Bindable
-import android.databinding.Observable
+import android.databinding.ObservableBoolean
 
-interface Command : Observable {
-    @Bindable
-    fun isEnabled(): Boolean
+interface Command {
+    fun isEnabled(): ObservableBoolean
 
-    fun setEnabled(value: Boolean)
-
-    fun execute(obj: Any)
+    fun execute(obj: Any?)
 }

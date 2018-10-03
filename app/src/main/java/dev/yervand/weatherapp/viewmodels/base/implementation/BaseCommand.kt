@@ -1,20 +1,15 @@
 package dev.yervand.weatherapp.viewmodels.base.implementation
 
 import android.databinding.BaseObservable
-import dev.yervand.weatherapp.BR
+import android.databinding.ObservableBoolean
 import dev.yervand.weatherapp.viewmodels.base.Command
 
 abstract class BaseCommand : BaseObservable(), Command {
-    private var isEnabled: Boolean = true
+    var enabled: ObservableBoolean = ObservableBoolean()
 
     init {
-        setEnabled(true)
+        enabled.set(true)
     }
 
-    override fun isEnabled() = isEnabled
-
-    override fun setEnabled(value: Boolean) {
-        isEnabled = value
-        notifyPropertyChanged(BR.enabled)
-    }
+    override fun isEnabled(): ObservableBoolean = enabled
 }
