@@ -1,4 +1,4 @@
-package dev.yervand.weatherapp.splash
+package dev.yervand.weatherapp.view.splash
 
 import dagger.Binds
 import dagger.Module

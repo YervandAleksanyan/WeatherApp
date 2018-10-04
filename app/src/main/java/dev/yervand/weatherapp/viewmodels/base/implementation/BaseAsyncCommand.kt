@@ -15,7 +15,6 @@ abstract class BaseAsyncCommand<T> : BaseCommand(), AsyncCommand, Disposable {
 
     var finished: ObservableBoolean = ObservableBoolean()
 
-
     var failureMessage: ObservableField<String> = ObservableField()
 
     init {

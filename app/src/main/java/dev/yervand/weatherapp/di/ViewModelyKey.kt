@@ -1,4 +1,4 @@
-package dev.yervand.weatherapp.base
+package dev.yervand.weatherapp.di
 
 import android.arch.lifecycle.ViewModel
 import dagger.MapKey

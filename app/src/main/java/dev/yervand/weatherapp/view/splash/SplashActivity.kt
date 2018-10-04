@@ -1,11 +1,11 @@
-package dev.yervand.weatherapp.splash
+package dev.yervand.weatherapp.view.splash
 
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
-import dev.yervand.weatherapp.base.BaseActivity
+import dev.yervand.weatherapp.view.base.BaseActivity
 import dev.yervand.weatherapp.view.weather.WeatherActivity
 
 

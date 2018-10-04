@@ -9,7 +9,8 @@
             type="dev.yervand.weatherapp.viewmodels.weather.WeatherActivityViewModel" />
     </data>
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -22,7 +23,9 @@
             app:duration="2000"
             app:progressColour="@android:color/holo_orange_dark" />
 
-        <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+        <android.support.constraint.ConstraintLayout
+
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -54,6 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
+                    android:text="@{viewModel.temp}"
                     android:textColor="@android:color/white"
                     android:textSize="80sp"
                     app:layout_constraintBottom_toBottomOf="@+id/city_pic"
@@ -92,7 +96,8 @@
                         <ImageView
                             android:id="@+id/weather_icon"
                             android:layout_width="40dp"
-                            android:layout_height="40dp" />
+                            android:layout_height="40dp"
+                            app:imageUrl="@{viewModel.weatherIcon}" />
 
                         <TextView
                             android:id="@+id/weather_text"
@@ -100,6 +105,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
+                            android:text="@{viewModel.weatherName}"
                             android:textColor="@android:color/white"
                             android:textSize="18sp" />
                     </LinearLayout>
@@ -122,6 +128,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
+                            android:text="@{viewModel.wind}"
                             android:textColor="@android:color/white"
                             android:textSize="18sp" />
                     </LinearLayout>
@@ -143,6 +150,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="10dp"
+                            android:text="@{viewModel.humidity}"
                             android:textColor="@android:color/white"
                             android:textSize="18sp" />
                     </LinearLayout>
@@ -162,6 +170,6 @@
 
         </android.support.constraint.ConstraintLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </layout>

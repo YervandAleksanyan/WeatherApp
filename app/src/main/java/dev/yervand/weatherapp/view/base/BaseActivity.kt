@@ -1,4 +1,4 @@
-package dev.yervand.weatherapp.base
+package dev.yervand.weatherapp.view.base
 
 import dagger.android.support.DaggerAppCompatActivity
 

@@ -9,6 +9,7 @@ interface WeatherService {
     companion object {
         val ENDPOINT = "http://api.openweathermap.org"
         val ICON_ENDPOINT = "http://openweathermap.org/img/w/"
+        val SUCCESS = "200"
     }
 
     @GET("/data/2.5/forecast")

@@ -12,11 +12,18 @@ import javax.inject.Inject
 
 class WeatherActivityViewModel @Inject constructor(repository: ForecastRepositoryImpl
 ) : AndroidViewModel(Application()) {
+    //commands
+    private val citiesInitializeCommand: BaseCommand
+    var fetchForecasts: AsyncCommand = FetchForecastsCommand(repository, this)
+
+    //properties
     var citiesMap: ObservableField<Map<Int, String>> = ObservableField()
     var currentPos: ObservableField<Int> = ObservableField()
-    private val citiesInitializeCommand: BaseCommand
-
-    var fetchForecasts: AsyncCommand = FetchForecastsCommand(repository, this)
+    var temp: ObservableField<String> = ObservableField()
+    var humidity: ObservableField<String> = ObservableField()
+    var wind: ObservableField<String> = ObservableField()
+    var weatherName: ObservableField<String> = ObservableField()
+    var weatherIcon: ObservableField<String> = ObservableField()
 
     init {
         citiesInitializeCommand = CitiesListInitializeCommand(this)

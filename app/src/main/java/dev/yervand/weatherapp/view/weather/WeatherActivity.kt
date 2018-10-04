@@ -6,9 +6,9 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import dev.yervand.weatherapp.R
-import dev.yervand.weatherapp.base.BaseActivity
 import dev.yervand.weatherapp.databinding.ActivityWeatherBinding
 import dev.yervand.weatherapp.di.factories.WeatherViewModelFactory
+import dev.yervand.weatherapp.view.base.BaseActivity
 import dev.yervand.weatherapp.viewmodels.weather.WeatherActivityViewModel
 import javax.inject.Inject
 

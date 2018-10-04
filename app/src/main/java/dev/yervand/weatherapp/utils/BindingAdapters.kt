@@ -14,10 +14,10 @@ import java.util.*
 object BindingAdapters {
     @JvmStatic
     @BindingAdapter("imageUrl")
-    fun ImageView.setImageUrl(path: String?) {
+    fun ImageView.loadWeatherIcon(path: String?) {
         Picasso
                 .get()
-                .load("${WeatherService.ICON_ENDPOINT}${path}.png")
+                .load("${WeatherService.ICON_ENDPOINT}$path.png")
                 .into(this)
     }
 
