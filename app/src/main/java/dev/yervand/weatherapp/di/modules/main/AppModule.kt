@@ -1,4 +1,4 @@
-package dev.yervand.weatherapp.di.modules
+package dev.yervand.weatherapp.di.modules.main
 
 import android.app.Application
 import android.content.Context

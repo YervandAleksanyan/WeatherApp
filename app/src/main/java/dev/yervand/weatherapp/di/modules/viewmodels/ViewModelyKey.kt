@@ -1,4 +1,4 @@
-package dev.yervand.weatherapp.di
+package dev.yervand.weatherapp.di.modules.viewmodels
 
 import android.arch.lifecycle.ViewModel
 import dagger.MapKey

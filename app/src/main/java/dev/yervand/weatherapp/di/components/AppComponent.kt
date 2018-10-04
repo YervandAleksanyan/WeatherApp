@@ -4,10 +4,9 @@ import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import dev.yervand.weatherapp.WeatherApp
-import dev.yervand.weatherapp.di.modules.AppModule
-import dev.yervand.weatherapp.di.modules.RetrofitModule
-import dev.yervand.weatherapp.di.modules.RxModule
-import dev.yervand.weatherapp.di.modules.ViewModelModule
+import dev.yervand.weatherapp.di.modules.main.AppModule
+import dev.yervand.weatherapp.di.modules.main.RetrofitModule
+import dev.yervand.weatherapp.di.modules.viewmodels.ViewModelModule
 import javax.inject.Singleton
 
 @Singleton
@@ -16,8 +15,8 @@ import javax.inject.Singleton
     AppModule::class,
     RetrofitModule::class,
     ActivityBuilder::class,
-    ViewModelModule::class,
-    RxModule::class])
+    ViewModelModule::class
+])
 interface AppComponent : AndroidInjector<WeatherApp> {
     @Component.Builder
     abstract class Builder : AndroidInjector.Builder<WeatherApp>()
