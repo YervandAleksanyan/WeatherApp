@@ -57,9 +57,7 @@ abstract class BaseAsyncCommand<T> : BaseCommand(), AsyncCommand, Disposable {
         disposed = true
     }
 
-    override fun isDisposed(): Boolean {
-        return disposed
-    }
+    override fun isDisposed(): Boolean = disposed
 
     private fun getAsyncActionObserver(): DisposableSingleObserver<T> {
         return object : DisposableSingleObserver<T>() {

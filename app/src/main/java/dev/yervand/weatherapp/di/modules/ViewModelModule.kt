@@ -5,7 +5,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import dev.yervand.weatherapp.base.ViewModelKey
-import dev.yervand.weatherapp.viewmodels.WeatherActivityViewModel
+import dev.yervand.weatherapp.viewmodels.weather.WeatherActivityViewModel
 
 
 @Module

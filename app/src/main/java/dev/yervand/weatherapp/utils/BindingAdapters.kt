@@ -1,10 +1,7 @@
 package dev.yervand.weatherapp.utils
 
 import android.databinding.BindingAdapter
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.Spinner
-import android.widget.TextView
+import android.widget.*
 import com.squareup.picasso.Picasso
 import dev.yervand.weatherapp.R
 import dev.yervand.weatherapp.domain.WeatherService
@@ -31,7 +28,7 @@ object BindingAdapters {
     @JvmStatic
     @BindingAdapter("spinnerItems")
     fun Spinner.setItems(items: ArrayList<String>) {
-        /*this.adapter = ArrayAdapter<String>()*/
+        this.adapter = ArrayAdapter<String>(this.context, R.layout.support_simple_spinner_dropdown_item, items)
     }
 
     @JvmStatic

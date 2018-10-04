@@ -5,7 +5,7 @@ import dagger.android.ContributesAndroidInjector
 import dev.yervand.weatherapp.di.modules.viewmodels.WeatherActivityModule
 import dev.yervand.weatherapp.splash.SplashActivity
 import dev.yervand.weatherapp.splash.SplashActivityModule
-import dev.yervand.weatherapp.view.WeatherActivity
+import dev.yervand.weatherapp.view.weather.WeatherActivity
 
 @Module
 abstract class ActivityBuilder {

@@ -6,7 +6,8 @@
 
         <variable
             name="viewModel"
-            type="dev.yervand.weatherapp.viewmodels.WeatherActivityViewModel" />
+            type="dev.yervand.weatherapp.viewmodels.weather.WeatherActivityViewModel" />
+
     </data>
 
     <RelativeLayout
@@ -17,7 +18,8 @@
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
 
         <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
@@ -26,7 +28,8 @@
             <Spinner
                 android:id="@+id/dropdownview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:spinnerItems="@{viewModel.citiesList}" />
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/main_ui_child"
