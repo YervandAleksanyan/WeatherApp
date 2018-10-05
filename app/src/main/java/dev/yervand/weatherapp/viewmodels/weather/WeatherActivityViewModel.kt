@@ -16,6 +16,7 @@ class WeatherActivityViewModel @Inject constructor(repository: ForecastRepositor
     private val citiesInitializeCommand: BaseCommand
     var fetchForecasts: AsyncCommand = FetchForecastsCommand(repository, this)
 
+
     //properties
     var citiesMap: ObservableField<Map<Int, String>> = ObservableField()
     var currentPos: ObservableField<Int> = ObservableField()

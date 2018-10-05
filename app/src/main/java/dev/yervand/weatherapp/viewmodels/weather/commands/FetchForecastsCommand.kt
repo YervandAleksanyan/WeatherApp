@@ -12,11 +12,19 @@ class FetchForecastsCommand(private var repository: ForecastRepositoryImpl,
                             private var viewModel: WeatherActivityViewModel) : BaseAsyncCommand<WeatherResponse>() {
 
     private var currentPos: Int = -1
+    var firstLoad = false
+    private var selectedCity: String? = ""
 
     override fun getAsyncAction(obj: Any?): Single<WeatherResponse>? {
-        currentPos = obj.toString().toInt()
-        val selectedCity = viewModel.citiesMap.get()?.values?.toList()?.get(currentPos)
-        return selectedCity?.let { repository.getSevenDayForecasts(it) }
+
+
+        return if (currentPos != obj.toString().toInt()
+        ) {
+            currentPos = obj.toString().toInt()
+            selectedCity = viewModel.citiesMap.get()?.values?.toList()?.get(currentPos)
+            firstLoad = true
+            selectedCity?.let { repository.getSevenDayForecasts(it) }
+        } else null
     }
 
     override fun handleResult(result: WeatherResponse): Boolean {

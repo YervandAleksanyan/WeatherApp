@@ -33,9 +33,9 @@ class RetrofitModule {
     @Provides
     internal fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         val builder = OkHttpClient.Builder()
-        builder.connectTimeout(300, TimeUnit.SECONDS)
-        builder.readTimeout(300, TimeUnit.SECONDS)
-        builder.writeTimeout(300, TimeUnit.SECONDS)
+        builder.connectTimeout(5000, TimeUnit.MILLISECONDS)
+        builder.readTimeout(5000, TimeUnit.MILLISECONDS)
+        builder.writeTimeout(5000, TimeUnit.MILLISECONDS)
         builder.addInterceptor(keyInterceptor())
         builder.addInterceptor(httpLoggingInterceptor)
 
