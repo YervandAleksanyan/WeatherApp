@@ -65,6 +65,13 @@ object BindingAdapters {
     }
 
     @JvmStatic
+    @BindingAdapter("selectedPosition")
+    fun Spinner.setSelectedPosition(pos: Int) {
+        this.setSelection(pos)
+    }
+
+
+    @JvmStatic
     @BindingAdapter(value = ["isVisible"])
     fun bindViewVisibility(view: View, isVisible: Any) {
         val visible = getVisibility(isVisible)

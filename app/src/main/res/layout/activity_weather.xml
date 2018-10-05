@@ -31,7 +31,8 @@
             android:visibility="visible"
             app:layout_constraintTop_toBottomOf="@+id/progress_bar"
             app:spinnerCommand="@{viewModel.fetchForecasts}"
-            app:spinnerItems="@{viewModel.citiesMap}" />
+            app:spinnerItems="@{viewModel.citiesMap}"
+            app:selectedPosition="@{viewModel.currentPos}" />
 
 
         <ImageView
@@ -39,7 +40,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:src="@drawable/moscow"
             android:visibility="visible"
             app:currentPos="@{viewModel.currentPos}"
             app:items="@{viewModel.citiesMap}"
