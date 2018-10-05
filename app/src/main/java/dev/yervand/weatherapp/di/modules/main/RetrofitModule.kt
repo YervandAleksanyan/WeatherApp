@@ -1,4 +1,4 @@
-package dev.yervand.weatherapp.di.modules
+package dev.yervand.weatherapp.di.modules.main
 
 import dagger.Module
 import dagger.Provides

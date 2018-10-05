@@ -21,10 +21,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="dev.yervand.weatherapp.view.splash.SplashActivity">
+        <activity
+            android:name="dev.yervand.weatherapp.view.splash.SplashActivity"
+            android:noHistory="true"
+            android:theme="@style/AppTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
