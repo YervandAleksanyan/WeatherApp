@@ -5,10 +5,14 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import dev.yervand.weatherapp.BR
 import dev.yervand.weatherapp.R
 import dev.yervand.weatherapp.databinding.ActivityWeatherBinding
 import dev.yervand.weatherapp.di.factories.WeatherViewModelFactory
+import dev.yervand.weatherapp.domain.model.Forecast
 import dev.yervand.weatherapp.view.base.BaseActivity
+import dev.yervand.weatherapp.view.controls.adapter.binding.ItemBinderBase
 import dev.yervand.weatherapp.viewmodels.weather.WeatherActivityViewModel
 import javax.inject.Inject
 
@@ -38,5 +42,9 @@ class WeatherActivity : BaseActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_weather)
         viewModel = ViewModelProviders.of(this, factory)[WeatherActivityViewModel::class.java]
         binding.viewModel = viewModel
+        binding.view = this
+        binding.forecastsList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     }
+
+    fun getViewBinder(): ItemBinderBase<Forecast> = ItemBinderBase(BR.forecast, R.layout.forecast_item)
 }

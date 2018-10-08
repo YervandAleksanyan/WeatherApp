@@ -42,8 +42,8 @@ data class Sys(
 
 data class Main(
         @SerializedName("temp") val temp: Double,
-        @SerializedName("temp_min") val tempMin: Double,
-        @SerializedName("temp_max") val tempMax: Double,
+        @SerializedName("temp_min") val tempMin: Float,
+        @SerializedName("temp_max") val tempMax: Float,
         @SerializedName("pressure") val pressure: Double,
         @SerializedName("sea_level") val seaLevel: Double,
         @SerializedName("grnd_level") val grndLevel: Double,
