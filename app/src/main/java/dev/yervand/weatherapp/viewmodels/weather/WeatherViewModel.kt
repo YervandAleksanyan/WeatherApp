@@ -11,14 +11,16 @@ import dev.yervand.weatherapp.viewmodels.base.implementation.BaseCommand
 import dev.yervand.weatherapp.viewmodels.weather.commands.CitiesListInitializeCommand
 import dev.yervand.weatherapp.viewmodels.weather.commands.FetchForecastsCommand
 import dev.yervand.weatherapp.viewmodels.weather.commands.SelectForecastItemCommand
+import dev.yervand.weatherapp.viewmodels.weather.mappers.WeatherViewModelMapper
 import javax.inject.Inject
 
-class WeatherActivityViewModel @Inject constructor(repository: ForecastRepositoryImpl
+class WeatherViewModel @Inject constructor(repository: ForecastRepositoryImpl,
+                                           mapper: WeatherViewModelMapper
 ) : AndroidViewModel(Application()) {
     //commands
     private val citiesInitializeCommand: BaseCommand
-    var fetchForecasts: AsyncCommand = FetchForecastsCommand(repository, this)
-    val selectItemCommand: BaseCommand = SelectForecastItemCommand(this)
+    var fetchForecasts: AsyncCommand = FetchForecastsCommand(repository, this, mapper)
+    val selectItemCommand: BaseCommand = SelectForecastItemCommand(this, mapper)
 
     //properties
     var citiesMap: ObservableField<Map<Int, String>> = ObservableField()
