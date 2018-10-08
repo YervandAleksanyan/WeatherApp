@@ -38,9 +38,9 @@
                 android:layout_height="wrap_content"
                 android:visibility="visible"
                 app:layout_constraintTop_toBottomOf="@+id/progress_bar"
-                app:selectedPosition="@{viewModel.currentPos}"
                 app:spinnerCommand="@{viewModel.fetchForecasts}"
-                app:spinnerItems="@{viewModel.citiesMap}" />
+                app:spinnerItems="@{viewModel.citiesMap}"
+                app:selectedPosition="@{viewModel.currentPos}" />
 
 
             <ImageView
@@ -203,6 +203,8 @@
                 android:id="@+id/forecasts_list"
                 clickHandler="@{view.forecastItemClickHandler()}"
                 isVisible="@{viewModel.fetchForecasts.isFinished()}"
+                selectItem="@{viewModel.selectedForecast}"
+                unSelectItem="@{viewModel.dayForecasts}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"

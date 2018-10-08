@@ -11,5 +11,7 @@ class SelectForecastItemCommand(private var viewModel: WeatherViewModel,
     override fun execute(obj: Any?) {
         val item: Forecast = obj as Forecast
         mapper.map(viewModel, item)
+        viewModel.selectedForecast.set(item)
+        viewModel.selectedForecastIndex.set(viewModel.dayForecasts.indexOf(item))
     }
 }

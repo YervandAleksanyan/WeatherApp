@@ -29,6 +29,8 @@ class FetchForecastsCommand(private var repository: ForecastRepositoryImpl,
         return if (result.cod == WeatherService.SUCCESS) {
             viewModel.currentPos.set(currentPos)
             mapper.map(viewModel, result.list[0])
+            viewModel.selectedForecast.set(result.list[0])
+            viewModel.selectedForecastIndex.set(0)
             viewModel.dayForecasts.clear()
             viewModel.dayForecasts.addAll(result.list)
             true

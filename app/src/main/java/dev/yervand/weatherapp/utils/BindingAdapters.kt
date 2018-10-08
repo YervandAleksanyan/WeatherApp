@@ -1,6 +1,7 @@
 package dev.yervand.weatherapp.utils
 
 import android.databinding.BindingAdapter
+import android.support.v7.widget.CardView
 import android.view.View
 import android.widget.*
 import com.squareup.picasso.Picasso
@@ -59,6 +60,13 @@ object BindingAdapters {
     @BindingAdapter("selectedPosition")
     fun Spinner.setSpinnerSelectedPosition(pos: Int) {
         this.setSelection(pos)
+    }
+
+    @JvmStatic
+    @BindingAdapter("selectCardBackground")
+    fun CardView.setCardViewSelectedBackground(selected: Boolean) {
+        if (selected) this.background = this.context.getDrawable(R.drawable.selected_card_backgorund)
+        else this.background = this.context.getDrawable(R.drawable.unselected_card_background)
     }
 
     @JvmStatic
