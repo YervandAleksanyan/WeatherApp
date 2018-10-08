@@ -32,15 +32,17 @@ abstract class BaseAsyncCommand<T> : BaseCommand(), AsyncCommand, Disposable {
     override fun execute(obj: Any?) {
         if (!enabled.get()) return
         val task = getAsyncAction(obj)
-        if (task != null) {
+        task?.let {
             busy.set(true)
             finished.set(false)
             failureMessage.set("")
-            action = task
+            action = it
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeWith<DisposableSingleObserver<T>>(getAsyncActionObserver())
         }
+
+
     }
 
     protected abstract fun getAsyncAction(obj: Any?): Single<T>?

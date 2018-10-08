@@ -1,6 +1,7 @@
 package dev.yervand.weatherapp.utils
 
 import android.databinding.BindingAdapter
+import android.support.v7.widget.CardView
 import android.view.View
 import android.widget.*
 import com.squareup.picasso.Picasso
@@ -21,33 +22,24 @@ object BindingAdapters {
                 .into(this)
     }
 
+    @BindingAdapter("tempToString")
+    @JvmStatic
+    fun TextView.tempToString(temp: Float) {
+        this.text = "$temp\u2103"
+    }
+
     @JvmStatic
     @BindingAdapter("items", "currentPos")
-    fun ImageView.setBackground(items: Map<Int, String>, pos: Int) {
+    fun ImageView.setCityPhoto(items: Map<Int, String>, pos: Int) {
         this.setBackgroundResource(items.keys.toList()[pos])
     }
 
+
+    //Spinner
     @JvmStatic
     @BindingAdapter("spinnerItems")
-    fun Spinner.setItems(items: Map<Int, String>) {
+    fun Spinner.setSpinnerItems(items: Map<Int, String>) {
         this.adapter = ArrayAdapter<String>(this.context, R.layout.support_simple_spinner_dropdown_item, items.values.toMutableList())
-    }
-
-    @JvmStatic
-    @BindingAdapter("select")
-    fun LinearLayout.setSelectableBackground(selected: Boolean) {
-        if (selected)
-            this.setBackgroundResource(R.drawable.selected_card_backgorund)
-        else
-            this.setBackgroundColor(R.drawable.selected_card_backgorund)
-    }
-
-    @JvmStatic
-    @BindingAdapter("dayAndTime")
-    fun TextView.changeText(timeStamp: Long) {
-        val sdf = SimpleDateFormat("EEE, MMM d,HH:mm")
-        val netDate = Date(timeStamp * 1000)
-        this.text = sdf.format(netDate)
     }
 
     @JvmStatic
@@ -59,18 +51,33 @@ object BindingAdapters {
             }
 
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                command.execute(p3)
+                command.execute(p2)
             }
         }
     }
 
     @JvmStatic
     @BindingAdapter("selectedPosition")
-    fun Spinner.setSelectedPosition(pos: Int) {
+    fun Spinner.setSpinnerSelectedPosition(pos: Int) {
         this.setSelection(pos)
     }
 
+    @JvmStatic
+    @BindingAdapter("selectCardBackground")
+    fun CardView.setCardViewSelectedBackground(selected: Boolean) {
+        if (selected) this.background = this.context.getDrawable(R.drawable.selected_card_backgorund)
+        else this.background = this.context.getDrawable(R.drawable.unselected_card_background)
+    }
 
+    @JvmStatic
+    @BindingAdapter("dayAndTime")
+    fun TextView.changeText(timeStamp: Long) {
+        val sdf = SimpleDateFormat("EEE, MMM d,HH:mm")
+        val netDate = Date(timeStamp * 1000)
+        this.text = sdf.format(netDate)
+    }
+
+    //View
     @JvmStatic
     @BindingAdapter(value = ["isVisible"])
     fun bindViewVisibility(view: View, isVisible: Any) {
