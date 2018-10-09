@@ -1,4 +1,4 @@
-package dev.yervand.weatherapp.utils
+package dev.yervand.weatherapp.viewmodels.weather
 
 import dev.yervand.weatherapp.R
 
