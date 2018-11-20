@@ -32,6 +32,7 @@ class WeatherViewModel @Inject constructor(repository: ForecastRepositoryImpl,
     var weatherIcon: ObservableField<String> = ObservableField()
     var dayForecasts: ObservableArrayList<Forecast> = ObservableArrayList()
     var selectedForecast: ObservableField<Forecast> = ObservableField()
+    var selectedForecastIndex: ObservableField<Int> = ObservableField()
 
     init {
         citiesInitializeCommand = CitiesListInitializeCommand(this)
