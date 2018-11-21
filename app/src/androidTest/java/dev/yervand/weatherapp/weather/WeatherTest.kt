@@ -28,6 +28,13 @@ class WeatherTest {
         Intents.release()
     }
 
+    /*
+    Scenario:Select city from list, load and show data
+	Given I have navigated to Weather screen
+    A cities list first item should be the same the entered data set first item
+	Then user select city from list ,after when city is selected label should be updated and loading started
+	When loading is complete all data should be shown on a screen
+    */
     @Test
     fun loadDataBySelectedCity() {
         navigatedToLoginScreen()

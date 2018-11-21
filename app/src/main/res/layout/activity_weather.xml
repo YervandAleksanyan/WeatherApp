@@ -201,9 +201,9 @@
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/forecasts_list"
-                items="@{viewModel.dayForecasts}"
                 clickHandler="@{view.forecastItemClickHandler()}"
                 isVisible="@{viewModel.fetchForecasts.isFinished()}"
+                items="@{viewModel.dayForecasts}"
                 selectItem="@{viewModel.selectedForecast}"
                 unSelectItem="@{viewModel.dayForecasts}"
                 android:layout_width="match_parent"
