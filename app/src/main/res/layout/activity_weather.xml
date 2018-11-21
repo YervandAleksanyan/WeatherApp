@@ -24,7 +24,7 @@
             android:layout_height="wrap_content">
 
             <dev.yervand.weatherapp.utils.views.MaterialProgressBar
-                android:id="@+id/progress_bar"
+                android:id="@+id/progress_indicator"
                 isVisible="@{viewModel.fetchForecasts.busy}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -37,10 +37,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="visible"
-                app:layout_constraintTop_toBottomOf="@+id/progress_bar"
+                app:layout_constraintTop_toBottomOf="@+id/progress_indicator"
+                app:selectedPosition="@{viewModel.currentPos}"
                 app:spinnerCommand="@{viewModel.fetchForecasts}"
-                app:spinnerItems="@{viewModel.citiesMap}"
-                app:selectedPosition="@{viewModel.currentPos}" />
+                app:spinnerItems="@{viewModel.citiesMap}" />
 
 
             <ImageView

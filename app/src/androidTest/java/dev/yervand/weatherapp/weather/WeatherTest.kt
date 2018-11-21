@@ -31,14 +31,12 @@ class WeatherTest {
     @Test
     fun loadDataBySelectedCity() {
         navigatedToLoginScreen()
-        checkFirstCountryNameIsValid()
+        WeatherModel.checkFirstCountryNameIsValid(CitiesViewModel.citiesMap.values.first())
+        WeatherModel.checkAfterSelectListItemIsUpdated()
+        WeatherModel.checkViewDataIsUpdatedAfterSelect()
     }
 
     private fun navigatedToLoginScreen() {
         activityTestRule.launchActivity(Intent())
-    }
-
-    private fun checkFirstCountryNameIsValid() {
-        WeatherModel.checkFirstCountryNameIsValid(CitiesViewModel.citiesMap.values.first())
     }
 }
