@@ -43,6 +43,11 @@ object WeatherModel {
         onView(withId(R.id.forecasts_list)).check(matches(isDisplayed()))
     }
 
+    fun checkCitiesListNotEmpty() {
+        onView(withId(R.id.cities_list_drop_down)).perform(click())
+        onData(allOf(`is`(instanceOf(String::class.java)), `is`(isDisplayed())))
+    }
+
     private fun waitForSeconds(time: Long) {
         try {
             Thread.sleep(time)

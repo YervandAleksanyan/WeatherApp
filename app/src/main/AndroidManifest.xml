@@ -6,6 +6,10 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+    <instrumentation
+        android:name="dev.yervand.weatherapp.test.Instrumentation"
+        android:targetPackage="dev.yervand.weatherapp.test" />
+
     <application
         android:name=".WeatherApp"
         android:allowBackup="true"
@@ -14,6 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <uses-library android:name="android.test.runner" />
         <activity android:name=".view.weather.WeatherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -27,6 +32,7 @@
             android:theme="@style/AppTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
