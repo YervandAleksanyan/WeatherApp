@@ -3,12 +3,7 @@
     package="dev.yervand.weatherapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-    <instrumentation
-        android:name="dev.yervand.weatherapp.test.Instrumentation"
-        android:targetPackage="dev.yervand.weatherapp.test" />
 
     <application
         android:name=".WeatherApp"

@@ -1,4 +1,4 @@
-package dev.yervand.weatherapp.base
+package dev.yervand.weatherapp.test
 
 import android.app.Activity
 import android.support.test.rule.ActivityTestRule

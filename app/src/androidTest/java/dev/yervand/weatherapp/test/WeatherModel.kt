@@ -1,4 +1,4 @@
-package dev.yervand.weatherapp.weather
+package dev.yervand.weatherapp.test
 
 import android.support.test.espresso.Espresso.onData
 import android.support.test.espresso.Espresso.onView
