@@ -57,5 +57,5 @@ fun selectItem(recyclerView: RecyclerView, items: ObservableArrayList<Forecast>?
         it.selected = false
     }
     item?.selected = true
-    recyclerView.adapter.notifyDataSetChanged()
+    recyclerView.adapter?.notifyDataSetChanged()
 }

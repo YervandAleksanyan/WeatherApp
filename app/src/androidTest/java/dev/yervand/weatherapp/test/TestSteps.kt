@@ -1,45 +1,49 @@
 package dev.yervand.weatherapp.test
 
-import android.app.Activity
-import android.support.test.espresso.Espresso
-import android.support.test.espresso.action.ViewActions
-import android.support.test.espresso.assertion.ViewAssertions
-import android.support.test.espresso.matcher.ViewMatchers
-import android.test.InstrumentationTestCase
+import android.content.Intent
+import android.support.test.espresso.intent.Intents
+import android.support.test.runner.AndroidJUnit4
+import com.google.android.libraries.cloudtesting.screenshots.ScreenShotter
+import cucumber.api.java.Before
 import cucumber.api.java.en.Given
 import cucumber.api.java.en.Then
 import cucumber.api.java.en.When
-import dev.yervand.weatherapp.R
+import dev.yervand.weatherapp.view.weather.WeatherActivity
+import org.junit.After
+import org.junit.Rule
+import org.junit.runner.RunWith
 
+@RunWith(AndroidJUnit4::class)
+class TestSteps {
+    @Rule
+    private var activityTestRule: ManualTestRule<WeatherActivity> = ManualTestRule(WeatherActivity::class.java)
 
-class TestSteps : InstrumentationTestCase() {
-    private var currentActivity: Activity? = null
-
-    @Given("^I've launched \"([^\"]*)\"$")
-    @Throws(Throwable::class)
-    fun I_ve_launched_(activityClassName: String) {
-        val targetPackage = instrumentation.targetContext.packageName
-        val activityClass = Class.forName(activityClassName) as Class<Activity>
-
-        currentActivity = launchActivity<Activity>(targetPackage, activityClass, null)
+    @Before
+    fun initialSetup() {
+        Intents.init()
     }
 
-    @When("^I click (.*)")
-    @Throws(Throwable::class)
-    fun I_click_(id: String) {
-        Espresso.onView(ViewMatchers.withId(resolve(id))).perform(ViewActions.click())
+    @After
+    fun tearDown() {
+        Intents.release()
+
     }
 
-    @Then("^I should see \"([^\"]*)\"$")
-    fun I_should_see_(text: String) {
-        Espresso.onView(ViewMatchers.withText(text)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    @Given("^I have navigated to Weather screen$")
+    fun i_have_navigated_to_Weather_screen() {
+        activityTestRule.launchActivity(Intent())
+        ScreenShotter.takeScreenshot("^I have navigated to Weather screen", activityTestRule.activity)
     }
 
-    @Throws(NoSuchFieldException::class, IllegalAccessException::class)
-    private fun resolve(id: String): Int {
-        val clazz = R.id::class.java
-        val field = clazz!!.getField(id)
+    @When("^List of cities will  created$")
+    fun list_of_cities_will_created() {
+        WeatherModel.checkCitiesListNotEmpty()
+        ScreenShotter.takeScreenshot("^List of cities will  created$", activityTestRule.activity)
+    }
 
-        return field.getInt(field)
+    @Then("A cities list first item should be the same the entered data set first item")
+    fun a_cities_list_first_item_should_be_the_same_the_entered_data_set_first_item() {
+        assert(false)
+        ScreenShotter.takeScreenshot("^List of cities will  created$", activityTestRule.activity)
     }
 }

@@ -1,6 +1,7 @@
 Feature: Weather
 
-  Scenario: User notification
-    Given I've launched "com.android.example.MainActivity"
-    When I click fab
-    Then I should see "Replace with your own action"
+  Scenario: Weather Activity
+
+    Given I have navigated to Weather screen
+    When  List of cities will  created
+    Then  A cities list first item should be the same the entered data set first item

@@ -10,11 +10,11 @@ import org.hamcrest.CoreMatchers.*
 
 
 object WeatherModel {
-    private const val CITY_NAME = "London"
+    private const val CITY_NAME = "Moscow"
 
 
     fun checkFirstCountryNameIsValid(firstValidCountryName: String) {
-        onView(withId(android.R.id.text1)).check(matches(withText(firstValidCountryName)))
+        onData(allOf(`is`(instanceOf(String::class.java)), `is`(firstValidCountryName)))
     }
 
     fun checkAfterSelectListItemIsUpdated() {
