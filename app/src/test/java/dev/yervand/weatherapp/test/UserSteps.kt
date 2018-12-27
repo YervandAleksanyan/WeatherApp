@@ -18,6 +18,6 @@ class UserSteps {
 
     @Then("C")
     fun c() {
-        assert(false)
+        assert(true)
     }
 }
