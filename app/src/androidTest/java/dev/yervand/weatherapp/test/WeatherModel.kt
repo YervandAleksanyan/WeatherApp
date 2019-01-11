@@ -10,7 +10,7 @@ import org.hamcrest.CoreMatchers.*
 
 
 object WeatherModel {
-    private const val CITY_NAME = "Moscow"
+    private const val CITY_NAME = "London"
 
 
     fun checkFirstCountryNameIsValid(firstValidCountryName: String) {

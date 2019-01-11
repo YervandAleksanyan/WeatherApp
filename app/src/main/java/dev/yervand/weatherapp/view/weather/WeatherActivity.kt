@@ -29,7 +29,6 @@ class WeatherActivity : BaseActivity() {
     @Inject
     lateinit var factory: WeatherViewModelFactory
 
-
     private lateinit var binding: ActivityWeatherBinding
 
     private lateinit var viewModel: WeatherViewModel
